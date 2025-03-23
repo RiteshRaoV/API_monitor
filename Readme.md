@@ -18,7 +18,7 @@ The **API Monitor SDK** is a Django middleware package that logs API request and
 ### Install via Git
 
 ```bash
-pip install git+https://github.com/RiteshRaoV/api-monitor.git
+pip install git+https://github.com/RiteshRaoV/API_monitor.git
 ```
 
 ### Install Locally (For Development)
