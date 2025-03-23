@@ -42,7 +42,7 @@ In your `settings.py`, add the middleware:
 ```python
 MIDDLEWARE = [
     ...
-    'api_monitor.middleware.APIMonitorMiddleware',
+    'API_monitor.middleware.APIMonitorMiddleware',
 ]
 ```
 ### 2. Add Configurations
