@@ -8,7 +8,8 @@ setup(
         "requests",       
         "geoip2",         
         "psutil",         
-        "django",         
+        "django",
+        "cryptography"         
     ],
     classifiers=[
         "Programming Language :: Python :: 3",
