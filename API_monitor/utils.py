@@ -58,7 +58,10 @@ def extract_app_name(request):
 def send_log(log_data,url):
     """ Sends API monitoring data to the tracking server. """
     try:
-        log_data = encrypt_payload(log_data)
+        encrypted_log_data = encrypt_payload(log_data)
+        log_data = {
+            "log_data":encrypted_log_data
+        }
         response = requests.post(url, json=log_data, timeout=2)
         response.raise_for_status()
     except requests.RequestException:
