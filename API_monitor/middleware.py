@@ -19,7 +19,7 @@ class APIMonitorMiddleware(MiddlewareMixin):
         return None
 
     def process_response(self, request, response):
-        if APIMonitorConfig.SECRET_KEY and APIMonitorConfig.MONITORED_APPS:
+        if APIMonitorConfig.ACCESS_KEY and APIMonitorConfig.MONITORED_APPS:
             app_name = extract_app_name(request)
             if app_name and app_name in APIMonitorConfig.MONITORED_APPS:
                 latency = round((time.time() - request.start_time) * 1000, 2)
@@ -42,8 +42,8 @@ class APIMonitorMiddleware(MiddlewareMixin):
                     abuse_detected = api_call_counts[client_ip] > APIMonitorConfig.RATE_LIMIT_THRESHOLD
                 
                 log_data = {
+                    "access_key": APIMonitorConfig.ACCESS_KEY,
                     "log_data": {
-                        "secret_key": APIMonitorConfig.SECRET_KEY,
                         "app_name": app_name,
                         "tags": APIMonitorConfig.TAGS,
                         "endpoint": request.path,
