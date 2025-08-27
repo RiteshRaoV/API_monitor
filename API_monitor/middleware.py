@@ -1,12 +1,12 @@
 import time
-import threading
-import json
 import psutil
 from django.utils.deprecation import MiddlewareMixin
 from django.db import connection
 import geoip2.database
+
+from .worker import enqueue_log
 from .config import APIMonitorConfig
-from .utils import send_log,extract_app_name
+from .utils import extract_app_name
 
 # In-memory store for rate limiting
 api_call_counts = {}
@@ -64,5 +64,5 @@ class APIMonitorMiddleware(MiddlewareMixin):
                         "error": response.content.decode()[:500] if response.status_code >= 400 else None,
                     }
                 }
-                threading.Thread(target=send_log, args=(log_data,APIMonitorConfig.TRACKING_SERVER_URL)).start()
+                enqueue_log(log_data)
         return response
